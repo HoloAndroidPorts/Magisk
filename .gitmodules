@@ -10,9 +10,11 @@
 [submodule "MagiskManager"]
 	path = java
 	url = https://github.com/HoloAndroidPorts/MagiskManager.git
+        branch = kitkat-test
 [submodule "jni/busybox"]
 	path = jni/external/busybox
 	url = https://github.com/HoloAndroidPorts/ndk-busybox.git
+        branch = kitkat-test
 [submodule "jni/external/dtc"]
 	path = jni/external/dtc
 	url = https://github.com/dgibson/dtc
