@@ -18,8 +18,8 @@ before_script:
 env:
   global:
     - ANDROID_HOME=/usr/local/android-sdk
-    - MAGISK_VER_INTEGER=1430
-    - MAGISK_VER_STRING=14.3
+    - MAGISK_VER_INTEGER=1440
+    - MAGISK_VER_STRING=14.4
     - PATH=/usr/local/android-sdk/ndk-bundle:${PATH}
 
 script:

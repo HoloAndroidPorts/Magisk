@@ -194,7 +194,7 @@
 #define HAVE_POSIX_FADVISE 1
 
 /* Define to 1 if you have the `pthread_condattr_setclock' function. */
-#define HAVE_PTHREAD_CONDATTR_SETCLOCK 1
+/* #undef HAVE_PTHREAD_CONDATTR_SETCLOCK */
 
 /* Have PTHREAD_PRIO_INHERIT. */
 /* #undef HAVE_PTHREAD_PRIO_INHERIT */

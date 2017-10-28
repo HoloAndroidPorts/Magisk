@@ -9,10 +9,10 @@
 	url = https://github.com/topjohnwu/magiskpolicy.git
 [submodule "MagiskManager"]
 	path = java
-	url = https://github.com/topjohnwu/MagiskManager.git
+	url = https://github.com/HoloAndroidPorts/MagiskManager.git
 [submodule "jni/busybox"]
 	path = jni/external/busybox
-	url = https://github.com/topjohnwu/ndk-busybox.git
+	url = https://github.com/HoloAndroidPorts/ndk-busybox.git
 [submodule "jni/external/dtc"]
 	path = jni/external/dtc
 	url = https://github.com/dgibson/dtc
