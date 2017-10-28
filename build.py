@@ -89,16 +89,6 @@ def build_apk(args):
 
 	os.chdir('java')
 
-	# Build unhide app and place in assets
-	proc = subprocess.run('{} unhide:assembleRelease'.format(os.path.join('.', 'gradlew')), shell=True)
-	if proc.returncode != 0:
-		error('Build Magisk Manager failed!')
-	source = os.path.join('unhide', 'build', 'outputs', 'apk', 'release', 'unhide-release-unsigned.apk')
-	target = os.path.join('app', 'src', 'main', 'assets', 'unhide.apk')
-	cp(source, target)
-
-	print('')
-
 	if args.release:
 		if not os.path.exists(os.path.join('..', 'release_signature.jks')):
 			error('Please generate a java keystore and place it in \'release_signature.jks\'')
@@ -210,15 +200,15 @@ def gen_update_binary():
 	if not os.path.exists(binary):
 		error('Please build \'binary\' before zipping!')
 	with open(binary, 'rb') as b64xz:
-		update_bin.append('#! /sbin/sh\nEX_ARM=')
-		update_bin.append(''.join("\\\\x{:02X}".format(c) for c in b64xz.read()))
+		update_bin.append('#! /sbin/sh\nEX_ARM=\'')
+		update_bin.append(''.join("\\x{:02X}".format(c) for c in b64xz.read()))
 	binary = os.path.join('libs', 'x86', 'b64xz')
 	with open(binary, 'rb') as b64xz:
-		update_bin.append('\nEX_X86=')
-		update_bin.append(''.join("\\\\x{:02X}".format(c) for c in b64xz.read()))
+		update_bin.append('\'\nEX_X86=\'')
+		update_bin.append(''.join("\\x{:02X}".format(c) for c in b64xz.read()))
 	binary = os.path.join('libs', 'armeabi-v7a', 'busybox')
 	with open(binary, 'rb') as busybox:
-		update_bin.append('\nBB_ARM=')
+		update_bin.append('\'\nBB_ARM=')
 		update_bin.append(base64.b64encode(lzma.compress(busybox.read())).decode('ascii'))
 	binary = os.path.join('libs', 'x86', 'busybox')
 	with open(binary, 'rb') as busybox:
@@ -350,6 +340,7 @@ def cleanup(args):
 		os.chdir('java')
 		subprocess.run('{} clean'.format(os.path.join('.', 'gradlew')), shell=True)
 		os.chdir('..')
+		silentremove('snet.apk')
 
 	if 'zip' in args.target:
 		header('* Cleaning zip files')
